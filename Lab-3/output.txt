@@ -1,0 +1,411 @@
+1.Token : int		Type : Keyword
+2.Token : main		Type : Identifier
+3.Token : (		Type : Special Character
+4.Token : int		Type : Keyword
+5.Token : argc		Type : Identifier
+6.Token : ,		Type : Special Character
+7.Token : char		Type : Keyword
+8.Token : **			Type : Invalid
+9.Token : argv		Type : Identifier
+10.Token : )		Type : Special Character
+11.Token : {		Type : Special Character
+12.Token : FILE		Type : Identifier
+13.Token : *			Type : Operator
+14.Token : fpin		Type : Identifier
+15.Token : ,		Type : Special Character
+16.Token : *			Type : Operator
+17.Token : fpout		Type : Identifier
+18.Token : ;		Type : Special Character
+19.Token : char		Type : Keyword
+20.Token : buf		Type : Identifier
+21.Token : [		Type : Special Character
+22.Token : 2000		Type : Constant
+23.Token : ]		Type : Special Character
+24.Token : ,		Type : Special Character
+25.Token : *			Type : Operator
+26.Token : token		Type : Identifier
+27.Token : ;		Type : Special Character
+28.Token : int		Type : Keyword
+29.Token : lines		Type : Identifier
+30.Token : ,		Type : Special Character
+31.Token : i		Type : Identifier
+32.Token : =			Type : Operator
+33.Token : 1		Type : Constant
+34.Token : ,		Type : Special Character
+35.Token : j		Type : Identifier
+36.Token : ,		Type : Special Character
+37.Token : k		Type : Identifier
+38.Token : ;		Type : Special Character
+39.Token : double		Type : Keyword
+40.Token : array		Type : Identifier
+41.Token : [		Type : Special Character
+42.Token : 2000		Type : Constant
+43.Token : ]		Type : Special Character
+44.Token : [		Type : Special Character
+45.Token : 3		Type : Constant
+46.Token : ]		Type : Special Character
+47.Token : ;		Type : Special Character
+48.Token : if		Type : Keyword
+49.Token : (		Type : Special Character
+50.Token : argc		Type : Identifier
+51.Token : !=			Type : Operator
+52.Token : 3		Type : Constant
+53.Token : )		Type : Special Character
+54.Token : {		Type : Special Character
+55.Token : fprintf		Type : Identifier
+56.Token : (		Type : Special Character
+57.Token : stderr		Type : Identifier
+58.Token : ,		Type : Special Character
+59.Token : 		Type : String
+60.Token : )		Type : Special Character
+61.Token : ;		Type : Special Character
+62.Token : return		Type : Keyword
+63.Token : 0		Type : Constant
+64.Token : ;		Type : Special Character
+65.Token : }		Type : Special Character
+66.Token : fpin		Type : Identifier
+67.Token : =			Type : Operator
+68.Token : fopen		Type : Identifier
+69.Token : (		Type : Special Character
+70.Token : argv		Type : Identifier
+71.Token : [		Type : Special Character
+72.Token : 1		Type : Constant
+73.Token : ]		Type : Special Character
+74.Token : ,		Type : Special Character
+75.Token : 		Type : String
+76.Token : )		Type : Special Character
+77.Token : ;		Type : Special Character
+78.Token : fpout		Type : Identifier
+79.Token : =			Type : Operator
+80.Token : fopen		Type : Identifier
+81.Token : (		Type : Special Character
+82.Token : argv		Type : Identifier
+83.Token : [		Type : Special Character
+84.Token : 2		Type : Constant
+85.Token : ]		Type : Special Character
+86.Token : ,		Type : Special Character
+87.Token : 		Type : String
+88.Token : )		Type : Special Character
+89.Token : ;		Type : Special Character
+90.Token : if		Type : Keyword
+91.Token : (		Type : Special Character
+92.Token : fpin		Type : Identifier
+93.Token : ==			Type : Operator
+94.Token : NULL		Type : Identifier
+95.Token : )		Type : Special Character
+96.Token : {		Type : Special Character
+97.Token : fprintf		Type : Identifier
+98.Token : (		Type : Special Character
+99.Token : stderr		Type : Identifier
+100.Token : ,		Type : Special Character
+101.Token : 		Type : String
+102.Token : )		Type : Special Character
+103.Token : ;		Type : Special Character
+104.Token : return		Type : Keyword
+105.Token : 0		Type : Constant
+106.Token : ;		Type : Special Character
+107.Token : }		Type : Special Character
+108.Token : fgets		Type : Identifier
+109.Token : (		Type : Special Character
+110.Token : buf		Type : Identifier
+111.Token : ,		Type : Special Character
+112.Token : 2000		Type : Constant
+113.Token : ,		Type : Special Character
+114.Token : fpin		Type : Identifier
+115.Token : )		Type : Special Character
+116.Token : ;		Type : Special Character
+117.Token : token		Type : Identifier
+118.Token : =			Type : Operator
+119.Token : strtok		Type : Identifier
+120.Token : (		Type : Special Character
+121.Token : buf		Type : Identifier
+122.Token : ,		Type : Special Character
+123.Token : 		Type : String
+124.Token : )		Type : Special Character
+125.Token : ;		Type : Special Character
+126.Token : lines		Type : Identifier
+127.Token : =			Type : Operator
+128.Token : atoi		Type : Identifier
+129.Token : (		Type : Special Character
+130.Token : token		Type : Identifier
+131.Token : )		Type : Special Character
+132.Token : ;		Type : Special Character
+133.Token : printf		Type : Identifier
+134.Token : (		Type : Special Character
+135.Token : 		Type : String
+136.Token : ,		Type : Special Character
+137.Token : lines		Type : Identifier
+138.Token : )		Type : Special Character
+139.Token : ;		Type : Special Character
+140.Token : while		Type : Keyword
+141.Token : (		Type : Special Character
+142.Token : fgets		Type : Identifier
+143.Token : (		Type : Special Character
+144.Token : buf		Type : Identifier
+145.Token : ,		Type : Special Character
+146.Token : 2000		Type : Constant
+147.Token : ,		Type : Special Character
+148.Token : fpin		Type : Identifier
+149.Token : )		Type : Special Character
+150.Token : !=			Type : Operator
+151.Token : NULL		Type : Identifier
+152.Token : )		Type : Special Character
+153.Token : {		Type : Special Character
+154.Token : token		Type : Identifier
+155.Token : =			Type : Operator
+156.Token : strtok		Type : Identifier
+157.Token : (		Type : Special Character
+158.Token : buf		Type : Identifier
+159.Token : ,		Type : Special Character
+160.Token : 		Type : String
+161.Token : )		Type : Special Character
+162.Token : ;		Type : Special Character
+163.Token : token		Type : Identifier
+164.Token : =			Type : Operator
+165.Token : strtok		Type : Identifier
+166.Token : (		Type : Special Character
+167.Token : NULL		Type : Identifier
+168.Token : ,		Type : Special Character
+169.Token : 		Type : String
+170.Token : )		Type : Special Character
+171.Token : ;		Type : Special Character
+172.Token : j		Type : Identifier
+173.Token : =			Type : Operator
+174.Token : 1		Type : Constant
+175.Token : ;		Type : Special Character
+176.Token : while		Type : Keyword
+177.Token : (		Type : Special Character
+178.Token : token		Type : Identifier
+179.Token : !=			Type : Operator
+180.Token : NULL		Type : Identifier
+181.Token : )		Type : Special Character
+182.Token : {		Type : Special Character
+183.Token : array		Type : Identifier
+184.Token : [		Type : Special Character
+185.Token : i		Type : Identifier
+186.Token : ]		Type : Special Character
+187.Token : [		Type : Special Character
+188.Token : j		Type : Identifier
+189.Token : ]		Type : Special Character
+190.Token : =			Type : Operator
+191.Token : atof		Type : Identifier
+192.Token : (		Type : Special Character
+193.Token : token		Type : Identifier
+194.Token : )		Type : Special Character
+195.Token : ;		Type : Special Character
+196.Token : token		Type : Identifier
+197.Token : =			Type : Operator
+198.Token : strtok		Type : Identifier
+199.Token : (		Type : Special Character
+200.Token : NULL		Type : Identifier
+201.Token : ,		Type : Special Character
+202.Token : 		Type : String
+203.Token : )		Type : Special Character
+204.Token : ;		Type : Special Character
+205.Token : j		Type : Identifier
+206.Token : ++			Type : Operator
+207.Token : ;		Type : Special Character
+208.Token : }		Type : Special Character
+209.Token : i		Type : Identifier
+210.Token : ++			Type : Operator
+211.Token : ;		Type : Special Character
+212.Token : }		Type : Special Character
+213.Token : printf		Type : Identifier
+214.Token : (		Type : Special Character
+215.Token : 		Type : String
+216.Token : ,		Type : Special Character
+217.Token : lines		Type : Identifier
+218.Token : )		Type : Special Character
+219.Token : ;		Type : Special Character
+220.Token : double		Type : Keyword
+221.Token : temp		Type : Identifier
+222.Token : ;		Type : Special Character
+223.Token : int		Type : Keyword
+224.Token : dist		Type : Identifier
+225.Token : [		Type : Special Character
+226.Token : lines		Type : Identifier
+227.Token : +			Type : Operator
+228.Token : 1		Type : Constant
+229.Token : ]		Type : Special Character
+230.Token : [		Type : Special Character
+231.Token : lines		Type : Identifier
+232.Token : +			Type : Operator
+233.Token : 1		Type : Constant
+234.Token : ]		Type : Special Character
+235.Token : ;		Type : Special Character
+236.Token : for		Type : Keyword
+237.Token : (		Type : Special Character
+238.Token : i		Type : Identifier
+239.Token : =			Type : Operator
+240.Token : 1		Type : Constant
+241.Token : ;		Type : Special Character
+242.Token : i		Type : Identifier
+243.Token : <=			Type : Operator
+244.Token : lines		Type : Identifier
+245.Token : ;		Type : Special Character
+246.Token : i		Type : Identifier
+247.Token : ++			Type : Operator
+248.Token : )		Type : Special Character
+249.Token : for		Type : Keyword
+250.Token : (		Type : Special Character
+251.Token : j		Type : Identifier
+252.Token : =			Type : Operator
+253.Token : 1		Type : Constant
+254.Token : ;		Type : Special Character
+255.Token : j		Type : Identifier
+256.Token : <=			Type : Operator
+257.Token : lines		Type : Identifier
+258.Token : ;		Type : Special Character
+259.Token : j		Type : Identifier
+260.Token : ++			Type : Operator
+261.Token : )		Type : Special Character
+262.Token : {		Type : Special Character
+263.Token : temp		Type : Identifier
+264.Token : =			Type : Operator
+265.Token : 0		Type : Constant
+266.Token : ;		Type : Special Character
+267.Token : for		Type : Keyword
+268.Token : (		Type : Special Character
+269.Token : k		Type : Identifier
+270.Token : =			Type : Operator
+271.Token : 1		Type : Constant
+272.Token : ;		Type : Special Character
+273.Token : k		Type : Identifier
+274.Token : <=			Type : Operator
+275.Token : 2		Type : Constant
+276.Token : ;		Type : Special Character
+277.Token : k		Type : Identifier
+278.Token : ++			Type : Operator
+279.Token : )		Type : Special Character
+280.Token : temp		Type : Identifier
+281.Token : +=			Type : Operator
+282.Token : (		Type : Special Character
+283.Token : array		Type : Identifier
+284.Token : [		Type : Special Character
+285.Token : i		Type : Identifier
+286.Token : ]		Type : Special Character
+287.Token : [		Type : Special Character
+288.Token : k		Type : Identifier
+289.Token : ]		Type : Special Character
+290.Token : -			Type : Operator
+291.Token : array		Type : Identifier
+292.Token : [		Type : Special Character
+293.Token : j		Type : Identifier
+294.Token : ]		Type : Special Character
+295.Token : [		Type : Special Character
+296.Token : k		Type : Identifier
+297.Token : ]		Type : Special Character
+298.Token : )		Type : Special Character
+299.Token : *			Type : Operator
+300.Token : (		Type : Special Character
+301.Token : array		Type : Identifier
+302.Token : [		Type : Special Character
+303.Token : i		Type : Identifier
+304.Token : ]		Type : Special Character
+305.Token : [		Type : Special Character
+306.Token : k		Type : Identifier
+307.Token : ]		Type : Special Character
+308.Token : -			Type : Operator
+309.Token : array		Type : Identifier
+310.Token : [		Type : Special Character
+311.Token : j		Type : Identifier
+312.Token : ]		Type : Special Character
+313.Token : [		Type : Special Character
+314.Token : k		Type : Identifier
+315.Token : ]		Type : Special Character
+316.Token : )		Type : Special Character
+317.Token : ;		Type : Special Character
+318.Token : dist		Type : Identifier
+319.Token : [		Type : Special Character
+320.Token : i		Type : Identifier
+321.Token : ]		Type : Special Character
+322.Token : [		Type : Special Character
+323.Token : j		Type : Identifier
+324.Token : ]		Type : Special Character
+325.Token : =			Type : Operator
+326.Token : (		Type : Special Character
+327.Token : int		Type : Keyword
+328.Token : )		Type : Special Character
+329.Token : (		Type : Special Character
+330.Token : sqrt		Type : Identifier
+331.Token : (		Type : Special Character
+332.Token : temp		Type : Identifier
+333.Token : )		Type : Special Character
+334.Token : +			Type : Operator
+335.Token : 0.5		Type : Constant
+336.Token : )		Type : Special Character
+337.Token : ;		Type : Special Character
+338.Token : }		Type : Special Character
+339.Token : fprintf		Type : Identifier
+340.Token : (		Type : Special Character
+341.Token : fpout		Type : Identifier
+342.Token : ,		Type : Special Character
+343.Token : 		Type : String
+344.Token : ,		Type : Special Character
+345.Token : lines		Type : Identifier
+346.Token : )		Type : Special Character
+347.Token : ;		Type : Special Character
+348.Token : for		Type : Keyword
+349.Token : (		Type : Special Character
+350.Token : i		Type : Identifier
+351.Token : =			Type : Operator
+352.Token : 1		Type : Constant
+353.Token : ;		Type : Special Character
+354.Token : i		Type : Identifier
+355.Token : <=			Type : Operator
+356.Token : lines		Type : Identifier
+357.Token : ;		Type : Special Character
+358.Token : i		Type : Identifier
+359.Token : ++			Type : Operator
+360.Token : )		Type : Special Character
+361.Token : {		Type : Special Character
+362.Token : for		Type : Keyword
+363.Token : (		Type : Special Character
+364.Token : j		Type : Identifier
+365.Token : =			Type : Operator
+366.Token : 1		Type : Constant
+367.Token : ;		Type : Special Character
+368.Token : j		Type : Identifier
+369.Token : <=			Type : Operator
+370.Token : lines		Type : Identifier
+371.Token : ;		Type : Special Character
+372.Token : j		Type : Identifier
+373.Token : ++			Type : Operator
+374.Token : )		Type : Special Character
+375.Token : fprintf		Type : Identifier
+376.Token : (		Type : Special Character
+377.Token : fpout		Type : Identifier
+378.Token : ,		Type : Special Character
+379.Token : 		Type : String
+380.Token : ,		Type : Special Character
+381.Token : dist		Type : Identifier
+382.Token : [		Type : Special Character
+383.Token : i		Type : Identifier
+384.Token : ]		Type : Special Character
+385.Token : [		Type : Special Character
+386.Token : j		Type : Identifier
+387.Token : ]		Type : Special Character
+388.Token : )		Type : Special Character
+389.Token : ;		Type : Special Character
+390.Token : fprintf		Type : Identifier
+391.Token : (		Type : Special Character
+392.Token : fpout		Type : Identifier
+393.Token : ,		Type : Special Character
+394.Token : 		Type : String
+395.Token : )		Type : Special Character
+396.Token : ;		Type : Special Character
+397.Token : }		Type : Special Character
+398.Token : fclose		Type : Identifier
+399.Token : (		Type : Special Character
+400.Token : fpin		Type : Identifier
+401.Token : )		Type : Special Character
+402.Token : ;		Type : Special Character
+403.Token : fclose		Type : Identifier
+404.Token : (		Type : Special Character
+405.Token : fpout		Type : Identifier
+406.Token : )		Type : Special Character
+407.Token : ;		Type : Special Character
+408.Token : return		Type : Keyword
+409.Token : 0		Type : Constant
+410.Token : ;		Type : Special Character
+411.Token : }		Type : Special Character
