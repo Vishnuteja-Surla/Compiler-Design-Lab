@@ -5,17 +5,17 @@ Roll: CS21B2037
 
 /*
 The CFG I chose is:
-1. S -> AB | BC
-2. A -> a
-3. B -> b
-4. C -> S | e
-Here e is epsilon
+1. Expr -> Term + Expr | Term - Expr | Term
+2. Term -> Factor * Term | Factor / Term | Factor
+3. Factor -> (Expr) | Variable
+4. Variable -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z
 */
 
 // Including the header files
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<ctype.h>
 
 // Defining the constants
 #define SUCCESS 1
@@ -25,26 +25,36 @@ Here e is epsilon
 const char *ptr;
 char input[100];
 
-// Function prototypes
-int S(), A(), B(), C(); 
+// Function definitions
+int Expr(), Term(), Factor(), Variable();
 
-// S -> AB | BC
-int S(){
-    printf("%-16s S -> AB | BC\n", ptr);
-    if(A()){
-        if(B()){
-            return(SUCCESS);
+// Expr -> Term + Expr | Term - Expr | Term
+int Expr(){
+    printf("%-16s Expr -> Term + Expr | Term - Expr | Term\n", ptr);
+    if(Term()){
+        if(*ptr == '+'){
+            printf("%-16s Expr -> Term + Expr\n", ptr);
+            ptr++;
+            if(Expr()){
+                return(SUCCESS);
+            }
+            else{
+                return(FAILURE);
+            }
+        }
+        else if(*ptr == '-'){
+            printf("%-16s Expr -> Term - Expr\n", ptr);
+            ptr++;
+            if(Expr()){
+                return(SUCCESS);
+            }
+            else{
+                return(FAILURE);
+            }
         }
         else{
-            return(FAILURE);
-        }
-    }
-    else if(B()){
-        if(C()){
+            printf("%-16s Expr -> Term\n", ptr);
             return(SUCCESS);
-        }
-        else{
-            return(FAILURE);
         }
     }
     else{
@@ -52,10 +62,61 @@ int S(){
     }
 }
 
-// A -> a
-int A(){
-    if(*ptr == 'a'){
-        printf("%-16s A -> a\n", ptr);
+// Term -> Factor * Term | Factor / Term | Factor
+int Term(){
+    printf("%-16s Term -> Factor * Term | Factor / Term | Factor\n", ptr);
+    if(Factor()){
+        if(*ptr == '*'){
+            printf("%-16s Term -> Factor * Term\n", ptr);
+            ptr++;
+            if(Term()){
+                return(SUCCESS);
+            }
+            else{
+                return(FAILURE);
+            }
+        }
+        else if(*ptr == '/'){
+            printf("%-16s Term -> Factor / Term\n", ptr);
+            ptr++;
+            if(Term()){
+                return(SUCCESS);
+            }
+            else{
+                return(FAILURE);
+            }
+        }
+        else{
+            printf("%-16s Term -> Factor\n", ptr);
+            return(SUCCESS);
+        }
+    }
+    else{
+        return(FAILURE);
+    }
+}
+
+// Factor -> (Expr) | Number
+int Factor(){
+    printf("%-16s Factor -> (Expr) | Number\n", ptr);
+    if(*ptr == '('){
+        printf("%-16s Factor -> (Expr)\n", ptr);
+        ptr++;
+        if(Expr()){
+            if(*ptr == ')'){
+                ptr++;
+                return(SUCCESS);
+            }
+            else{
+                return(FAILURE);
+            }
+        }
+        else{
+            return(FAILURE);
+        }
+    }
+    else if(isdigit(*ptr) || isalpha(*ptr)){
+        printf("%-16s Factor -> Number\n", ptr);
         ptr++;
         return(SUCCESS);
     }
@@ -64,30 +125,6 @@ int A(){
     }
 }
 
-// B -> b
-int B(){
-    if(*ptr == 'b'){
-        printf("%-16s B -> b\n", ptr);
-        ptr++;
-        return(SUCCESS);
-    }
-    else{
-        return(FAILURE);
-    }
-}
-
-// C -> S | e
-int C(){
-    if(S()){
-        return(SUCCESS);
-    }
-    else{
-        printf("%-16s C -> e\n", ptr);
-        return(SUCCESS);
-    }
-}
-
-// Main function
 int main(int argc, char *argv[]){
 
     // Taking the input string
@@ -98,7 +135,7 @@ int main(int argc, char *argv[]){
     printf("-----------------------------\n");
 
     // Calling the starting non-terminal S
-    if(S() && *ptr == '\0'){
+    if(Expr() && *ptr == '\0'){
         printf("-----------------------------\n");
         printf("String is successfully parsed\n");
         return(0);
