@@ -88,10 +88,10 @@ int C(){
 }
 
 // Main function
-int main(){
+int main(int argc, char *argv[]){
 
-    printf("Enter the string: ");
-    scanf("%s", input);
+    // Taking the input string
+    strcpy(input, argv[1]);
     ptr = input;
 
     printf("\nInput\t\tAction\n");
