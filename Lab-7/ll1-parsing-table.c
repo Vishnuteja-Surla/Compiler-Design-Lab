@@ -1,7 +1,5 @@
-/*
-Name : S. Vishnu Teja
-Roll : CS21B2037 
-*/
+// Roll: CS21B2019
+// Name: Devarakonda SLR Siddesh
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,7 +12,13 @@ typedef struct {
     char nonTerminal;
     char production[MAX][MAX];
     int noOfProductions;
+    char dirsymb[MAX][MAX];
 } Rule;
+
+typedef struct {
+    char nonTerminal;
+    char dirsymb[MAX][MAX];
+} dirsymbSet;
 
 typedef struct {
     char startSymbol;
@@ -32,6 +36,8 @@ typedef struct {
 
 CFG cfg;
 firstFollow table[MAX];
+dirsymbSet dirsym[MAX];
+char parsing_table[MAX][MAX][MAX];
 
 void print_terms()
 {
@@ -112,7 +118,9 @@ int index_in_table(firstFollow table[], char symbol, int n_s)
 {
     for(int i = 0; i < n_s; i++)
         if(table[i].symbol == symbol)
+        {
             return i;
+        }
     printf("Trying to find index of %c in ", symbol);
     print_non_terms();
     exit(1);
@@ -176,6 +184,25 @@ void print_follow(firstFollow table[], int n_s)
         for(int j = 0; j < n - 1; j++)
             printf("%c, ", table[i].follow[j]);
         printf("%c }\n", table[i].follow[n - 1]);
+    }
+    printf("\n");
+}
+
+void print_dirsymb(CFG cfg, dirsymbSet dirsym[])
+{
+    printf("\nDirect Symbol Sets:\n");
+    for(int i = 0; i < cfg.noOfRules; i++)
+    {
+        printf("\t%c", cfg.rules[i].nonTerminal);
+        for(int j = 0; j < cfg.rules[i].noOfProductions; j++)
+        {
+            printf(" -> %s ==> ", cfg.rules[i].production[j]);
+            printf("{ ");
+            for(int k = 0; k < strlen(dirsym[i].dirsymb[j]) - 1; k++)
+                printf("%c, ", dirsym[i].dirsymb[j][k]);
+            printf("%c }\n\t ", dirsym[i].dirsymb[j][strlen(dirsym[i].dirsymb[j]) - 1]);
+        }
+        printf("\n");
     }
 }
 
@@ -300,13 +327,181 @@ void follow(CFG cfg)
     print_follow(table, n_s);
 }
 
+void dirsymb_set(CFG cfg) {
+    int n_nt = strlen(cfg.nonTerminals);
+    int n_t = strlen(cfg.terminals);
+    int n_s = n_nt + n_t;
+
+    for (int i = 0; i < cfg.noOfRules; i++) 
+    {
+        for (int j = 0; j < cfg.rules[i].noOfProductions; j++) 
+        {
+            char dirsymb[MAX] = "";
+            char production[MAX];
+            char nonTerm;
+            int epsilon_exists = 0;
+            int include_follow = 0;
+
+            nonTerm = cfg.rules[i].nonTerminal;
+            strcpy(production, cfg.rules[i].production[j]);
+
+            for (int k = 0; k < strlen(production); k++) 
+            {
+                if (k == 0 || epsilon_exists) {
+                    if (islower(production[k]) || production[k] == '$') 
+                    {
+                        char str[2] = { production[k], '\0' };
+                        sets_union(dirsymb, str, 0);
+                        break;
+                    } 
+                    else if (isupper(production[k])) 
+                    {
+                        int index = index_in_table(table, production[k], n_s);
+                        char *first = table[index].first;
+                        epsilon_exists = if_epsilon(first);
+                        if (epsilon_exists)
+                            first = remove_epsilon(first);
+                        sets_union(dirsymb, first, 0);
+                    } else if (production[k] == '#')
+                        epsilon_exists = 1;
+                }
+            }
+            if (epsilon_exists)
+                include_follow = 1;
+            if (include_follow)
+            {
+                int index = index_in_table(table, nonTerm, n_s);
+                sets_union(dirsymb, table[index].follow, 0);
+            }
+            strcpy(dirsym[i].dirsymb[j], dirsymb);
+        }
+    }
+    print_dirsymb(cfg, dirsym);
+}
+
+void printParsingTable(char table[][MAX][MAX], int n_nt, int n_t)
+{
+    printf("LL(1) Parsing Table:\n");
+    printf("\t\t");
+    for(int i = 0; i < n_t; i++)
+    {
+        printf("%c\t\t\t", cfg.terminals[i]);
+    }
+    printf("\n");
+    for(int i = 0; i < n_nt; i++)
+    {
+        printf("\t%c\t", cfg.nonTerminals[i]);
+        for(int j = 0; j < n_t; j++)
+        {
+            if(strcmp(table[i][j], "") != 0)
+                printf("%c->%s\t\t\t", cfg.nonTerminals[i], table[i][j]);
+            else
+                printf("\t\t\t");
+        }
+        printf("\n");
+    }
+}
+
+void parsingTable()
+{
+    int n_nt = strlen(cfg.nonTerminals);
+    int n_t = strlen(cfg.terminals);
+    int check = 0;
+
+    for(int i = 0; i < n_nt; i++)
+    {
+        for(int j = 0; j < n_t; j++)
+        {
+            strcpy(parsing_table[i][j], "");
+        }
+    }
+    for(int i = 0; i < cfg.noOfRules; i++)
+    {
+        for(int j = 0; j < n_t; j++)
+        {
+            for(int k = 0; k < cfg.rules[i].noOfProductions; k++)
+            {
+                if(strchr(dirsym[i].dirsymb[k], cfg.terminals[j]) != NULL)
+                {   
+                    if(strcmp(parsing_table[i][j],"") == 0)
+                        strcpy(parsing_table[i][j], cfg.rules[i].production[k]);
+                    else
+                    {
+                        check = 1;
+                        strcat(parsing_table[i][j], " | ");
+                        strcat(parsing_table[i][j], cfg.rules[i].production[k]);
+                    }
+                }
+            }
+        }
+    }
+    printParsingTable(parsing_table, n_nt, n_t);
+    if(check)
+    {
+        printf("\n\n[STATUS] Grammar is not LL(1)\n");
+        exit(1);
+    }
+}
+
+void parsing(char s[])
+{
+    int n_nt = strlen(cfg.nonTerminals);
+    int n_t = strlen(cfg.terminals);
+    int n_s = n_nt + n_t;
+
+    char stack[MAX] = "";
+    int top = -1;
+    stack[++top] = cfg.startSymbol;
+
+    int i = 0;
+    while(stack[top] != '$')
+    {
+        char x = stack[top];
+        char a = s[i];
+        if(x == a)
+        {
+            top--;
+            i++;
+        }
+        else if(isupper(x))
+        {
+            int i = strchr(cfg.nonTerminals, x) - cfg.nonTerminals;
+            int j = strchr(cfg.terminals, a) - cfg.terminals;
+            if(strcmp(parsing_table[i][j], "") == 0)
+            {
+                printf("\n[STATUS] String is rejected\n");
+                exit(1);
+            }
+            else
+            {
+                top--;
+                char *prod = parsing_table[i][j];
+                for(int k = strlen(prod) - 1; k >= 0; k--)
+                {
+                    stack[++top] = prod[k];
+                }
+            }
+        }
+        else
+        {
+            printf("\n[STATUS] String is rejected\n");
+            exit(1);
+        }
+    }
+    if(stack[top] == '$' && i == strlen(s))
+        printf("\n[STATUS] String is accepted\n");
+    else
+        printf("\n[STATUS] String is rejected\n");
+}
+
 int main()
 {
     FILE *fp;
     char str[MAX];
     int ruleCount = 0;
+    char string[MAX];
 
-    fp = fopen("CFG.txt", "r");
+    fp = fopen("CFG", "r");
     if(fp == NULL)
     {
         printf("File not found\n");
@@ -316,13 +511,15 @@ int main()
     {
         ruleCount++;
         Rule rule;
-    
+
         rule.nonTerminal = strtok(str, " =\n")[0];
         strcpy(rule.production[0], strtok(NULL, " =\n"));
         // for inserting non terminal
         int exist = insert_non_term(rule.nonTerminal);
         if(!exist)
+        {
             cfg.rules[strlen(cfg.nonTerminals) - 1].nonTerminal = rule.nonTerminal;
+        }
         if(ruleCount == 1)
             cfg.startSymbol = rule.nonTerminal;
         // for inserting production
@@ -332,6 +529,7 @@ int main()
             {
                 int j = cfg.rules[i].noOfProductions;
                 strcpy(cfg.rules[i].production[j], rule.production[0]);
+                strcpy(cfg.rules[i].dirsymb[j], "");
                 cfg.rules[i].noOfProductions++;
                 break;
             }
@@ -349,6 +547,13 @@ int main()
     print_cfg();
     first(cfg);
     follow(cfg);
+    dirsymb_set(cfg);
+    parsingTable();
+
+    printf("\n\nEnter the string : ");
+    scanf("%s", string);
+
+    parsing(string);
 
     return 0;
 }
